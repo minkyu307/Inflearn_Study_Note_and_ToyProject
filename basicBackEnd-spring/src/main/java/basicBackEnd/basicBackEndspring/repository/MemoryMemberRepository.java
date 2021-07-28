@@ -1,9 +1,13 @@
 package basicBackEnd.basicBackEndspring.repository;
 
 import basicBackEnd.basicBackEndspring.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
+/*리포지토리 어노테이션이 있으면 어플리케이션 실행시 자동으로 스프링 빈으로
+ 스프링 컨테이너에 등록해준다. */
+//@Repository
 public class MemoryMemberRepository implements MemberRepository {
 
     private static Map<Long, Member> store = new HashMap<>();
