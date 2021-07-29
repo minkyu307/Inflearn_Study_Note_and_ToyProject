@@ -5,6 +5,7 @@ import basicBackEnd.basicBackEndspring.repository.MemberRepository;
 import basicBackEnd.basicBackEndspring.repository.MemoryMemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,7 @@ import java.util.Optional;
 /*서비스 어노테이션이 있으면 어플리케이션 실행시 스프링 컨테이너에
  스프링 빈으로 자동으로 등록해준다*/
 //@Service
+@Transactional
 public class MemberService {
     private final MemberRepository memberRepository;
 

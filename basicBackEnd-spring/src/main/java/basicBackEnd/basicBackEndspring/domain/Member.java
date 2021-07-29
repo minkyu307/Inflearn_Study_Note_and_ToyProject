@@ -1,8 +1,19 @@
 package basicBackEnd.basicBackEndspring.domain;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+
+@Entity
 public class Member {
+
+    /*id의 순서를 생성될때마다 자동으로 배정*/
+    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
+
+
     public Long getId() {
         return id;
     }
