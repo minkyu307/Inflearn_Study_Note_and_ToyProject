@@ -20,6 +20,7 @@ public class OrderApp {
         memberService.join(member);
         Order order = orderService.createOrder(memberId, "itemA", 10000);
         System.out.println("order = " + order);*/
+
         ApplicationContext applicationContext = new AnnotationConfigApplicationContext(AppConfig.class);
         MemberService memberService = applicationContext.getBean("memberService", MemberService.class);
         OrderService orderService = applicationContext.getBean("orderService", OrderService.class);
