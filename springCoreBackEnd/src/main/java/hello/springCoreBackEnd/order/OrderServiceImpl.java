@@ -6,7 +6,10 @@ import hello.springCoreBackEnd.discount.RateDiscountPolicy;
 import hello.springCoreBackEnd.member.Member;
 import hello.springCoreBackEnd.member.MemberRepository;
 import hello.springCoreBackEnd.member.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class OrderServiceImpl implements OrderService{
 
     /*하단의 두 의존관계는 인터페이스 뿐만 아니라 구체화된 클래스에도 의존하고있기 때문에
@@ -19,6 +22,7 @@ public class OrderServiceImpl implements OrderService{
     private final MemberRepository memberRepository;
     private final DiscountPolicy discountPolicy;
 
+    @Autowired
     public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
         this.memberRepository = memberRepository;
         this.discountPolicy = discountPolicy;
