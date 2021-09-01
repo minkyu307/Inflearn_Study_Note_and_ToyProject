@@ -7,13 +7,18 @@ public class Member {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "MEMBER_ID")
     private Long id;
 
-    @Column(name = "name")
+    @Column(name = "USERNAME")
     private String username;
 
+    /*멤버 입장에서 여러명의 멤버가 하나의 팀에 소속되어있기 때문에 멤버가 팀의 아이디를 FK로 가지고있다. */
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
 
-    public Member(){
+    public Member() {
 
     }
 
@@ -34,5 +39,12 @@ public class Member {
         this.username = username;
     }
 
+    public Team getTeam() {
+        return team;
+    }
 
+    public void changeTeam(Team team) {
+        this.team = team;
+        team.getMembers().add(this);
+    }
 }

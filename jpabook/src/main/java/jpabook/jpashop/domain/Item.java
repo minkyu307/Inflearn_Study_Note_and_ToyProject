@@ -1,16 +1,19 @@
 package jpabook.jpashop.domain;
 
-import javax.persistence.Column;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.List;
 
+@Entity
 public class Item {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     @Column(name = "ITEM_ID")
     private Long itemId;
+
+    @OneToMany(mappedBy = "item")
+    private List<OrderItem> orderItems = new ArrayList<>();
 
     private String name;
     private int price;
