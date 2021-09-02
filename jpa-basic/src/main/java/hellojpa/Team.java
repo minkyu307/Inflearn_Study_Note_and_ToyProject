@@ -16,7 +16,7 @@ public class Team {
 
     /*하나의 팀에 다수의 멤버가 있을때 다대일 관계
     * rdb 관점에선 fk하나로 양쪽에서 조인할수있지만 객체지향에서는
-    * 서로 참조할것을 가지고 있어야 한다. */
+    * 서로 참조할것을 가지고 있어야 역방향 조회할수 있다. 필수는 아님. */
     @OneToMany(mappedBy = "team")
     private List<Member> members=new ArrayList<>();
 
