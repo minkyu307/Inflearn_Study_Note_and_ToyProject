@@ -15,6 +15,9 @@ public class Item {
     @OneToMany(mappedBy = "item")
     private List<OrderItem> orderItems = new ArrayList<>();
 
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categories = new ArrayList<>();
+
     private String name;
     private int price;
     private int stockQuantity;
