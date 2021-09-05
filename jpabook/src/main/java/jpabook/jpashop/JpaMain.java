@@ -1,5 +1,6 @@
 package jpabook.jpashop;
 
+import jpabook.jpashop.domain.Book;
 import jpabook.jpashop.domain.Member;
 
 import javax.persistence.EntityManager;
@@ -20,6 +21,10 @@ public class JpaMain {
         /*트랜잭션에 쿼리 생성하여 보내고 커밋 성공하면 엔티티매니저 닫음*/
         try {
 
+            Book book = new Book();
+            book.setName("JPA");
+            book.setAutohr("dkdkdk");
+            em.persist(book);
 
             tx.commit();
         } catch (Exception e) {
