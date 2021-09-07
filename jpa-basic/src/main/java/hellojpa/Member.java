@@ -15,11 +15,12 @@ public class Member {
     private String username;
 
     /*멤버 입장에서 여러명의 멤버가 하나의 팀에 소속되어있기 때문에 멤버가 팀의 아이디를 FK로 가지고있다. */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY) //지연로딩
+    //@ManyToOne(fetch = FetchType.EAGER)  //즉시로딩
     @JoinColumn(name = "TEAM_ID")
     private Team team;
 
-    @OneToOne
+    @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "LOCKER_ID")
     private Locker locker;
 

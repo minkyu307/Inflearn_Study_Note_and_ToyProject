@@ -3,20 +3,27 @@ package hellojpa;
 import javax.persistence.*;
 
 @Entity
-public class Locker {
+public class Child {
 
     @Id
     @GeneratedValue
-    @Column(name = "LOCKER_ID")
     private Long id;
-
     private String name;
 
-    @OneToOne(mappedBy = "locker",fetch = FetchType.LAZY)
-    private Member member;
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "parent_id ")
+    private Parent parent;
 
     public Long getId() {
         return id;
+    }
+
+    public Parent getParent() {
+        return parent;
+    }
+
+    public void setParent(Parent parent) {
+        this.parent = parent;
     }
 
     public void setId(Long id) {
@@ -29,13 +36,5 @@ public class Locker {
 
     public void setName(String name) {
         this.name = name;
-    }
-
-    public Member getMember() {
-        return member;
-    }
-
-    public void setMember(Member member) {
-        this.member = member;
     }
 }

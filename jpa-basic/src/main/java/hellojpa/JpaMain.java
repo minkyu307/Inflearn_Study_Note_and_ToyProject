@@ -1,6 +1,7 @@
 package hellojpa;
 
 import javax.persistence.*;
+import java.time.temporal.Temporal;
 import java.util.List;
 
 public class JpaMain {
@@ -29,17 +30,29 @@ public class JpaMain {
             /*이 팀쪽에서 멤버를 추가하여 연결하는 문장을 멤버의 setTeam메서드 안으로 넘기면 편하다*/
 //            team.getMembers().add(member);
 
-            Movie movie = new Movie();
+            /*Movie movie = new Movie();
             movie.setActor("bbb");
             movie.setName("wind");
-            em.persist(movie);
+            em.persist(movie);*/
 
             /*영속성 컨테스트 1차캐시에 저장된 쿼리를 commit 없이 먼저 날리고 비운다*/
-            em.flush();
+            /*em.flush();
             em.clear();
 
             Movie findMovie = em.find(Movie.class, movie.getId());
-            System.out.println("findMovie = " + findMovie.getName() + findMovie.getActor());
+            System.out.println("findMovie = " + findMovie.getName() + findMovie.getActor());*/
+
+
+            Child child = new Child();
+            Child child1 = new Child();
+
+            Parent parent = new Parent();
+            parent.addChild(child);
+            parent.addChild(child1);
+
+            em.persist(parent);
+
+
 
             /*조회*/
             /*Member findMember = em.find(Member.class, member.getId());
@@ -62,6 +75,7 @@ public class JpaMain {
             tx.commit();
         } catch (Exception e) {
             tx.rollback();
+            e.printStackTrace();
         } finally{
             em.close();
         }
