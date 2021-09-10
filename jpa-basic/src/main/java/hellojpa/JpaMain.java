@@ -1,6 +1,9 @@
 package hellojpa;
 
 import javax.persistence.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
 import java.time.temporal.Temporal;
 import java.util.List;
 
@@ -43,15 +46,34 @@ public class JpaMain {
             System.out.println("findMovie = " + findMovie.getName() + findMovie.getActor());*/
 
 
-            Child child = new Child();
+            /*Child child = new Child();
             Child child1 = new Child();
 
             Parent parent = new Parent();
             parent.addChild(child);
             parent.addChild(child1);
 
-            em.persist(parent);
+            em.persist(parent);*/
 
+
+
+//            JPQL
+           /* List<Member> result = em.createQuery(
+                    "select m from Member m where m.username like '%kim%'", Member.class
+            ).getResultList();
+
+            for (Member m : result) {
+                System.out.println("m.getUsername() = " + m.getUsername());
+            }*/
+
+
+//            Criteria  안씀
+            /*CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Member> query = cb.createQuery(Member.class);
+
+            Root<Member> m = query.from(Member.class);
+            CriteriaQuery<Member> cq = query.select(m).where(cb.equal(m.get("username"), "kim1"));
+            List<Member> resulList = em.createQuery(cq).getResultList();*/
 
 
             /*조회*/
