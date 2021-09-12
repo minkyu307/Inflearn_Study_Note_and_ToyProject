@@ -20,15 +20,45 @@ public class JpaMain {
         /*트랜잭션에 쿼리 생성하여 보내고 커밋 성공하면 엔티티매니저 닫음*/
         try {
 
+            Team team = new Team();
+            team.setName("TeamA");
+            em.persist(team);
+
             Member member = new Member();
             member.setUsername("member1");
             member.setAge(10);
+            member.setTeam(team);
+            member.setType(MemberType.ADMIN);
             em.persist(member);
-            
+
             em.flush();
             em.clear();
-            
-            
+
+            //조인
+            /*String query = "select m from Member m inner join m.team t";
+            List<Member> result = em.createQuery(query, Member.class).getResultList();*/
+
+            //타입 조회
+            /*String query = "select m.username from Member m where m.type = jpql.MemberType.ADMIN";
+            List<Object> result = em.createQuery(query,Object.class).getResultList();
+            for (Object o :
+                    result) {
+                System.out.println("o = " + o);
+            }*/
+
+            //조건식
+            /*String query = "select " +
+                    "case when m.age <= 10 then 'student'" +
+                    "     when m.age >= 60 then 'oldman'" +
+                    "     else 'normal' end " +
+                    "from Member m";
+            List<String> result = em.createQuery(query, String.class).getResultList();
+
+            for (String s : result) {
+                System.out.println("s = " + s);
+            }*/
+
+
             //파라미터 바인딩 쿼리
             /*List<Member> result = em.createQuery("select m from Member m where m.username =?1",
                     Member.class).setParameter("1","member1").getResultList();*/
@@ -50,14 +80,14 @@ public class JpaMain {
             }*/
 
             //페이징
-            List<Member> resultList = em.createQuery(
+            /*List<Member> resultList = em.createQuery(
                     "select m from Member m order by m.age desc", Member.class
             ).setFirstResult(0).setMaxResults(10).getResultList();
             System.out.println("resultList = " + resultList.size());
             for (Member m :
                     resultList) {
                 System.out.println("m = " + m);
-            }
+            }*/
 
             tx.commit();
         } catch (Exception e) {
