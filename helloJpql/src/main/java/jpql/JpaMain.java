@@ -4,6 +4,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.EntityTransaction;
 import javax.persistence.Persistence;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -20,7 +21,7 @@ public class JpaMain {
         /*트랜잭션에 쿼리 생성하여 보내고 커밋 성공하면 엔티티매니저 닫음*/
         try {
 
-            Team team = new Team();
+            /*Team team = new Team();
             team.setName("TeamA");
             em.persist(team);
 
@@ -32,7 +33,44 @@ public class JpaMain {
             em.persist(member);
 
             em.flush();
+            em.clear();*/
+
+            //페치 조인 - 지연로딩을 무시하고 처음 sql을 보낼때 연관된 테이블도 한번에 불러옴. 
+            Team teamA = new Team();
+            teamA.setName("A");
+            em.persist(teamA);
+
+            Team teamB = new Team();
+            teamB.setName("B");
+            em.persist(teamB);
+
+            Member memberA = new Member();
+            memberA.setUsername("memberA");
+            memberA.setTeam(teamA);
+            em.persist(memberA);
+
+            Member memberB = new Member();
+            memberB.setUsername("memberB");
+            memberB.setTeam(teamA);
+            em.persist(memberB);
+
+            Member memberC = new Member();
+            memberC.setUsername("memberC");
+            memberC.setTeam(teamB);
+            em.persist(memberC);
+
+            em.flush();
             em.clear();
+
+            String query = "select m from Member m join fetch m.team";
+            List<Member> result = em.createQuery(query, Member.class).getResultList();
+
+            for (Member member : result) {
+                System.out.println("member.getUsername() = " + member.getUsername());
+                System.out.println("member.getTeam().getName() = " + member.getTeam().getName());
+            }
+
+
 
             //조인
             /*String query = "select m from Member m inner join m.team t";
